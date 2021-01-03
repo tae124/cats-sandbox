@@ -1,4 +1,4 @@
-package sandbox
+package sandbox.training1
 
 final case class Person(name: String, email: String)
 

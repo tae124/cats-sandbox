@@ -2,12 +2,13 @@ package sandbox
 
 import cats.instances.string._
 import cats.syntax.semigroup._
+import sandbox.training1.{Cat, Json, Person, Printable}
 
 object Main extends App {
-  import JsonWriterInstances._
-  import JsonSyntax._
-  import PrinterInstances._
-  import PrintableSyntax._
+  import sandbox.training1.JsonWriterInstances._
+  import sandbox.training1.JsonSyntax._
+  import sandbox.training1.PrinterInstances._
+  import sandbox.training1.PrintableSyntax._
 
   println("Hello " |+| "Cats!")
 

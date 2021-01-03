@@ -1,4 +1,4 @@
-package sandbox
+package sandbox.training1
 
 
 trait Printable[A] {
