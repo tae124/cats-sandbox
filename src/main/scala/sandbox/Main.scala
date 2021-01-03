@@ -1,44 +1,38 @@
 package sandbox
-
+import cats.instances.int._
 import cats.instances.string._
-import cats.syntax.semigroup._
-import sandbox.training1.{Cat, Json, Person, Printable}
+import cats.syntax.show._
+import java.util.Date
+import cats.Show
 
 object Main extends App {
-  import sandbox.training1.JsonWriterInstances._
-  import sandbox.training1.JsonSyntax._
-  import sandbox.training1.PrinterInstances._
-  import sandbox.training1.PrintableSyntax._
 
-  println("Hello " |+| "Cats!")
+  // cats built-in
+  val shownInt = 123.show
+  val shownString = "abc".show
 
-  val json1 = Json.toJson(Person("Dave", "dave@example.com"))
-  val json2 = Person("Steve", "steve@example.com").toJson
-
-  println(json1)
-  println(json2)
-
-  // 下記は曖昧なのでWorkしない
+  // custom instances
   /*
-  implicit val writer1: JsonWriter[String] =
-    JsonWriterInstances.stringWriter
-
-  implicit val writer2: JsonWriter[String] =
-    JsonWriterInstances.stringWriter
-
-  Json.toJson("A string")
+  implicit val dateShow: Show[Date] =
+    new Show[Date] {
+      def show(date: Date): String =
+        s"${date.getTime}ms since the epoch."
+    }
   */
+  // use Show's constructor
+  implicit val dateShow: Show[Date] =
+    Show.show(date => s"${date.getTime}ms since the epoch.")
 
-  // implicit valueと衝突する変数名は利用できない
-  val intPrinter = Printable.format(1234)
-  val stringPrinter = Printable.format("cats")
+  implicit val catShow: Show[Cat] =
+    Show.show(cat => s"${cat.name.show} is a ${cat.age.show} year-old ${cat.color.show} cat.")
 
-  println(intPrinter)
-  println(stringPrinter)
+  val shownDate = new Date().show
 
-  // print cat!
-  Printable.print(Cat("Mike", 5, "Brown"))
-  // use syntax
-  Cat("Mike", 5, "Brown").toPrint
+  val shownCat = Cat("Mike", 10, "White").show
+
+  println(shownInt)
+  println(shownString)
+  println(shownDate)
+  println(shownCat)
 
 }

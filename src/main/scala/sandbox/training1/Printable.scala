@@ -1,5 +1,7 @@
 package sandbox.training1
 
+import sandbox.Cat
+
 
 trait Printable[A] {
 
