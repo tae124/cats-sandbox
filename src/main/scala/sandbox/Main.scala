@@ -7,6 +7,7 @@ object Main extends App {
   import JsonWriterInstances._
   import JsonSyntax._
   import PrinterInstances._
+  import PrintableSyntax._
 
   println("Hello " |+| "Cats!")
 
@@ -36,5 +37,7 @@ object Main extends App {
 
   // print cat!
   Printable.print(Cat("Mike", 5, "Brown"))
+  // use syntax
+  Cat("Mike", 5, "Brown").toPrint
 
 }

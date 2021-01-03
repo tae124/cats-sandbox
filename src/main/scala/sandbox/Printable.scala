@@ -33,3 +33,12 @@ object PrinterInstances {
   }
 
 }
+
+object PrintableSyntax {
+
+  implicit class PrintableOps[A](value: A) {
+    def toFormat(implicit p: Printable[A]) = p.format(value)
+    def toPrint(implicit p: Printable[A]) = println(toFormat(p))
+  }
+
+}
