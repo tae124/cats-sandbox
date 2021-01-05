@@ -1,5 +1,7 @@
 package sandbox.training1
 
+import sandbox.{JsObject, JsString, Json, JsonWriter}
+
 final case class Person(name: String, email: String)
 
 object JsonWriterInstances {
